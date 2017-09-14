@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 /**
  * @author ：czg
  * @class ：BaseViewHolder.class
@@ -16,6 +18,7 @@ public abstract class BaseViewHolder<M> extends RecyclerView.ViewHolder {
 
     public BaseViewHolder(ViewGroup viewGroup, int layoutId) {
         super(LayoutInflater.from(viewGroup.getContext()).inflate(layoutId, viewGroup, false));
+        ButterKnife.bind(this,itemView);
     }
 
     public abstract void setData(M data);

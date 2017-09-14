@@ -19,4 +19,5 @@ public class ResourceResponse extends Response<String> {
     public String getBody() throws IOException {
         return mResponseBody.string();
     }
+
 }
