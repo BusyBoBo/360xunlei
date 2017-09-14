@@ -10,7 +10,7 @@ import okhttp3.ResponseBody;
  * @author ：czg
  * @class ：ResourceRequest.class
  * @date ：2017/9/13.
- * @describe ：TODO(input describe)
+ * @describe ：ResourceRequest
  */
 public class ResourceRequest extends ApiRequest<String> {
     @Override
