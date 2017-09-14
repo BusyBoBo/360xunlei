@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,11 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
 
     @Override
     protected void initData() {
-        mSearch=getIntent().getStringExtra("SEARCH");
+        mSearch = getIntent().getStringExtra("SEARCH");
+        if (mSearch != null) {
+            edSearch.setText(mSearch);
+            loadData();
+        }
     }
 
     @Override
@@ -137,6 +142,10 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
         @Override
 
         public void onSuccess(List<XunLeiModel> response) {
+            if (response.isEmpty()) {
+                rec.setEmptyView(LayoutInflater.from(SearchActivity.this).inflate(R.layout.empty_thumb, null));
+                return;
+            }
             mSearchAdapter.setData(response);
             rec.refreshComplete();
             rec.setNoMore(false);

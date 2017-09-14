@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.czg.xunlei.activity.ThumbActivity;
+import com.czg.xunlei.http.client.HttpClient;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        HttpClient.getInstances().init(this);
         setContentView(R.layout.activity_main);
         startActivity(new Intent(this, ThumbActivity.class));
     }

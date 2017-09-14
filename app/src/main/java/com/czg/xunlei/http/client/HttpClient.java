@@ -1,13 +1,16 @@
 package com.czg.xunlei.http.client;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
 import com.czg.xunlei.http.callback.CallBack;
 import com.czg.xunlei.http.request.ApiRequest;
 
+import java.io.File;
 import java.io.IOException;
 
+import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -22,15 +25,19 @@ import okhttp3.Response;
 public class HttpClient {
     private static HttpClient instances = new HttpClient();
     private static Handler uiHandler = new Handler(Looper.getMainLooper());
-    private final OkHttpClient mOkHttpClient;
+    private  OkHttpClient mOkHttpClient;
 
     public static HttpClient getInstances() {
         return instances;
     }
 
     private HttpClient() {
-        mOkHttpClient = new OkHttpClient.Builder().build();
+    }
 
+    public void init(Context context){
+        mOkHttpClient = new OkHttpClient
+                .Builder()
+                .cache(new Cache(new File(context.getCacheDir(), "okhttpcache"), 10 * 1024 * 1024)).build();
     }
 
     public <T> void send(final ApiRequest<T> request, final CallBack<T> callBack) {
@@ -45,6 +52,7 @@ public class HttpClient {
                     }
                 });
             }
+
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 

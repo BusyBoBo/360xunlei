@@ -87,7 +87,7 @@ public class DetailActivity extends BaseActivity {
             flow_type_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity( new Intent(DetailActivity.this, SearchActivity.class).putExtra("SEARCH",model.getApi()));
+                    startActivity( new Intent(DetailActivity.this, ThumbActivity.class).putExtra("API",model.getApi()));
                 }
             });
 
@@ -103,7 +103,7 @@ public class DetailActivity extends BaseActivity {
             flow_type_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity( new Intent(DetailActivity.this, SearchActivity.class).putExtra("SEARCH",model.getApi()));
+                    startActivity( new Intent(DetailActivity.this, ThumbActivity.class).putExtra("API",model.getApi()));
                 }
             });
 
@@ -125,7 +125,7 @@ public class DetailActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.image, R.id.tittle, R.id.marker, R.id.label, R.id.director, R.id.type_text, R.id.cast_text})
+    @OnClick({R.id.image, R.id.tittle, R.id.marker, R.id.label, R.id.director})
     public void onViewClicked(View view) {
         if(mDetailModel==null) {
             return;
@@ -138,13 +138,13 @@ public class DetailActivity extends BaseActivity {
                 startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getSearchId()));
                 break;
             case R.id.marker:
-                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getMaker().getApi()));
+                startActivity( new Intent(this, ThumbActivity.class).putExtra("API",mDetailModel.getMaker().getApi()));
                 break;
             case R.id.label:
-                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getLabel().getApi()));
+                startActivity( new Intent(this, ThumbActivity.class).putExtra("API",mDetailModel.getLabel().getApi()));
                 break;
             case R.id.director:
-                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getDirector().getApi()));
+                startActivity( new Intent(this, ThumbActivity.class).putExtra("API",mDetailModel.getDirector().getApi()));
                 break;
 
         }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -118,6 +119,7 @@ public class ThumbActivity extends BaseActivity {
             }
         };
         mDrawerToggle.syncState();
+     
         drawer_layout.setDrawerListener(mDrawerToggle);
 
 
