@@ -16,7 +16,7 @@ import butterknife.Bind;
  * @author ：czg
  * @class ：ThumViewHolder.class
  * @date ：2017/9/14.
- * @describe ：TODO(input describe)
+ * @describe ：ThumbViewHolder
  */
 public class ThumbViewHolder extends BaseViewHolder<ThumbModel> {
 

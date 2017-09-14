@@ -24,9 +24,17 @@ public class ThumbActivity extends BaseActivity {
     @Bind(R.id.xrecyclerview)
     XRecyclerView mXrecyclerview;
     private BaseAdapter<ThumbModel> mBaseAdapter;
+    private String mApi;
 
     @Override
     protected void initData() {
+        mApi = getIntent().getStringExtra("API");
+        loadData();
+
+    }
+
+    public void setApi(String api) {
+        mApi = api;
         loadData();
     }
 
@@ -34,8 +42,8 @@ public class ThumbActivity extends BaseActivity {
 
     private void loadData() {
         page = 1;
-        mXrecyclerview.setNoMore(false);
-        sendHttp(new ThumbRequest("vl_genre.php?g=da", page), new CallBack<List<ThumbModel>>() {
+        mXrecyclerview.setNoMore(false);//"vl_genre.php?g=da"
+        sendHttp(new ThumbRequest(mApi, page), new CallBack<List<ThumbModel>>() {
             @Override
             public void onSuccess(List<ThumbModel> response) {
                 mBaseAdapter.setData(response);
