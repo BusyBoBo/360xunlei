@@ -1,7 +1,10 @@
 package com.czg.xunlei.activity;
 
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.czg.xunlei.R;
@@ -23,8 +26,11 @@ public class ThumbActivity extends BaseActivity {
 
     @Bind(R.id.xrecyclerview)
     XRecyclerView mXrecyclerview;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawer_layout;
     private BaseAdapter<ThumbModel> mBaseAdapter;
     private String mApi;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void initData() {
@@ -46,8 +52,13 @@ public class ThumbActivity extends BaseActivity {
         sendHttp(new ThumbRequest(mApi, page), new CallBack<List<ThumbModel>>() {
             @Override
             public void onSuccess(List<ThumbModel> response) {
-                mBaseAdapter.setData(response);
-                mXrecyclerview.refreshComplete();
+                if (response.isEmpty()) {
+                    mXrecyclerview.setEmptyView(LayoutInflater.from(getApplicationContext()).inflate(R.layout.empty_thumb, null));
+                } else {
+                    mBaseAdapter.setData(response);
+                    mXrecyclerview.refreshComplete();
+                }
+
             }
 
             @Override
@@ -93,6 +104,23 @@ public class ThumbActivity extends BaseActivity {
                 }
             }
         });
+        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawer_layout, R.string.app_name, R.string.app_name) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        mDrawerToggle.syncState();
+        drawer_layout.setDrawerListener(mDrawerToggle);
+
+
         mXrecyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

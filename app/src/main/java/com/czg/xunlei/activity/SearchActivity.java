@@ -50,7 +50,7 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
 
     @Override
     protected void initData() {
-
+        mSearch=getIntent().getStringExtra("SEARCH");
     }
 
     @Override
@@ -101,6 +101,7 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
         page++;
         loadMoreData();
     }
+
     @OnClick(R.id.btn_search)
     public void onClick(View v) {
         mSearch = edSearch.getText().toString();
@@ -181,11 +182,12 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
         super.onResume();
         ClipboardManager systemService = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         if (systemService != null && systemService.getText() != null) {
-            edSearch.setText(systemService.getText());
+            if (TextUtils.isEmpty(mSearch)) {
+                edSearch.setText(systemService.getText());
+            }
+
         }
     }
-
-
 
 
 }

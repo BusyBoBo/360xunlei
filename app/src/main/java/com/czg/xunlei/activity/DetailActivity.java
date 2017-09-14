@@ -1,5 +1,6 @@
 package com.czg.xunlei.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.czg.xunlei.widget.FlowLayout;
 import com.czg.xunlei.widget.RatioImageView;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class DetailActivity extends BaseActivity {
 
@@ -43,6 +45,7 @@ public class DetailActivity extends BaseActivity {
     TextView castText;
     @Bind(R.id.cast)
     FlowLayout cast;
+    private VideoDetailModel mDetailModel;
 
     @Override
     protected void initData() {
@@ -65,6 +68,7 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void loadData(VideoDetailModel response) {
+        mDetailModel = response;
         setTitle(response.getSearchId());
         image.setRatio(response.getRatio());
         ImageLoader.setImage(image, response.getImage());
@@ -75,21 +79,33 @@ public class DetailActivity extends BaseActivity {
         label.setText("发行商：" + (response.getLabel() != null ? response.getLabel().getName() : ""));
         director.setText("作者：" + response.getDirector().getName());
         typeText.setText("类型：");
-        for (TypeModel model : response.getTypes()) {
+        for (final TypeModel model : response.getTypes()) {
             View flow_type_view = LayoutInflater.from(this).inflate(R.layout.item_flow_text, type, false);
             TextView tv_item_flow = (TextView) flow_type_view.findViewById(R.id.item_flow);
             tv_item_flow.setText(model.getName());
             type.addView(flow_type_view);
+            flow_type_view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity( new Intent(DetailActivity.this, SearchActivity.class).putExtra("SEARCH",model.getApi()));
+                }
+            });
 
         }
         castText.setText("演员：");
-        for (CastModel model : response.getCasts()) {
+        for (final CastModel model : response.getCasts()) {
             View flow_type_view = LayoutInflater.from(this).inflate(R.layout.item_flow_text, type, false);
             TextView tv_item_flow = (TextView) flow_type_view.findViewById(R.id.item_flow);
             tv_item_flow.setText(model.getName());
             if (!TextUtils.isEmpty(model.getName())) {
                 cast.addView(flow_type_view);
             }
+            flow_type_view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity( new Intent(DetailActivity.this, SearchActivity.class).putExtra("SEARCH",model.getApi()));
+                }
+            });
 
 
         }
@@ -107,4 +123,30 @@ public class DetailActivity extends BaseActivity {
     }
 
 
+
+
+    @OnClick({R.id.image, R.id.tittle, R.id.marker, R.id.label, R.id.director, R.id.type_text, R.id.cast_text})
+    public void onViewClicked(View view) {
+        if(mDetailModel==null) {
+            return;
+        }
+        switch (view.getId()) {
+            case R.id.image:
+                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getSearchId()));
+                break;
+            case R.id.tittle:
+                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getSearchId()));
+                break;
+            case R.id.marker:
+                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getMaker().getApi()));
+                break;
+            case R.id.label:
+                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getLabel().getApi()));
+                break;
+            case R.id.director:
+                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getDirector().getApi()));
+                break;
+
+        }
+    }
 }
