@@ -12,6 +12,6 @@
         android:gravity="center"
         android:padding="1.5dp"
         android:text=""
-        android:textColor="@color/black"
+        android:textColor="?attr/black"
         android:textSize="15sp"/>
 </FrameLayout>

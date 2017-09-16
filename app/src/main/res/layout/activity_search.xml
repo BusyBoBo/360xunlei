@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SEARCH"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="?attr/colorAccent"/>
 
         </LinearLayout>
         <RadioGroup
@@ -43,28 +43,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="DEFULT"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="?attr/colorAccent"/>
             <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/rb_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TIME"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="?attr/colorAccent"/>
             <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/rb_size"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="SIZE"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="?attr/colorAccent"/>
             <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/rb_rele"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="RELE"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="?attr/colorAccent"/>
         </RadioGroup>
 
 

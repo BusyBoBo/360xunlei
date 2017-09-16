@@ -5,5 +5,8 @@ package com.czg.xunlei;
  */
 
 public class Config {
-    public static String HOST = "http://www.javlibrary.com/cn/";
+    public static final String THEME="theme";
+    public static final int THEME_LIGHT=1;
+    public static final int THEME_DARK=2;
+    public static String HOST = "http://www.ja14b.com/cn/";
 }

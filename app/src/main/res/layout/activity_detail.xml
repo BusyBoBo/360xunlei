@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:textColor="@color/black"
+            android:textColor="?attr/black"
             android:textSize="20sp"
             tools:text="标题" />
 
@@ -34,7 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:textSize="18sp"
                 tools:text="日期" />
 
@@ -43,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:textSize="18sp"
                 tools:text="长度" />
         </LinearLayout>
@@ -58,7 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:textSize="18sp"
                 tools:text="制作商" />
 
@@ -67,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:textSize="18sp"
                 tools:text="发行商" />
         </LinearLayout>
@@ -76,7 +76,7 @@
             android:id="@+id/director"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="?attr/black"
             android:textSize="18sp"
             tools:text="长度" />
         <TextView
@@ -84,7 +84,7 @@
             android:id="@+id/type_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="?attr/black"
             android:textSize="18sp"
             tools:text="长度" />
         <com.czg.xunlei.widget.FlowLayout
@@ -97,7 +97,7 @@
             android:id="@+id/cast_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="?attr/black"
             android:textSize="18sp"
             tools:text="演员" />
         <com.czg.xunlei.widget.FlowLayout

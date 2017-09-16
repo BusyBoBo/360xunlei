@@ -2,27 +2,35 @@ package com.czg.xunlei;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.czg.xunlei.activity.ThumbActivity;
-import com.czg.xunlei.http.client.HttpClient;
+import com.czg.xunlei.activity.SettingActivity;
+import com.czg.xunlei.base.BaseActivity;
 
 
-public class MainActivity extends AppCompatActivity {
-    private EditText ed_search;
-    private RecyclerView rec;
-    private Button btn_search;
-
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        HttpClient.getInstances().init(this);
-        setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, ThumbActivity.class));
+
+
+
+    }
+
+    @Override
+    protected void initData() {
+        startActivity(new Intent(this, SettingActivity.class));
+        showLoadingView();
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 }
 
