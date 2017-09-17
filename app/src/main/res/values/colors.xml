@@ -5,10 +5,10 @@
     <color name="dark">#666666</color>
     <color name="light">#ffffff</color>
 
-    <attr name="colorPrimary" format="color"/>
-    <attr name="colorPrimaryDark" format="color"/>
-    <attr name="colorAccent" format="color"/>
-    <attr name="white" format="color"/>
-    <attr name="black" format="color"/>
-
+    <attr name="colorPrimary" format="color" />
+    <attr name="colorPrimaryDark" format="color" />
+    <attr name="colorAccent" format="color" />
+    <attr name="white" format="color" />
+    <attr name="black" format="color" />
+    <attr name="colorControlNormal"  format="color" />
 </resources>

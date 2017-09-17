@@ -1,6 +1,5 @@
 package com.czg.xunlei.activity;
 
-import android.app.ProgressDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -18,11 +17,11 @@ import com.czg.xunlei.R;
 import com.czg.xunlei.base.BaseActivity;
 import com.czg.xunlei.base.BaseAdapter;
 import com.czg.xunlei.base.OnItemClickListener;
-import com.czg.xunlei.viewholder.SearchViewHolder;
 import com.czg.xunlei.http.callback.CallBack;
 import com.czg.xunlei.http.client.HttpClient;
 import com.czg.xunlei.http.request.SearchRequest;
 import com.czg.xunlei.model.XunLeiModel;
+import com.czg.xunlei.viewholder.SearchViewHolder;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -47,7 +46,6 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
     private OkHttpClient mOkHttpClient;
     private BaseAdapter<XunLeiModel> mSearchAdapter;
     private String mSearch = "";
-    private ProgressDialog mProgressDialog;
 
     @Override
     protected void initData() {
@@ -86,14 +84,9 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
 
     public void loadData() {
         if (TextUtils.isEmpty(mSearch)) return;
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage("loading...");
-        }
-        mProgressDialog.show();
-
         page = 1;
         HttpClient.getInstances().send(new SearchRequest(mSearch, page, type), lodaDataCallBack);
+        showLoadingView();
     }
 
     public void loadMoreData() {
@@ -149,13 +142,13 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
             mSearchAdapter.setData(response);
             rec.refreshComplete();
             rec.setNoMore(false);
-            mProgressDialog.dismiss();
+            showDataView();
 
         }
 
         @Override
         public void onFail(Throwable throwable) {
-            mProgressDialog.dismiss();
+           showErrorView();
         }
     };
     private CallBack<List<XunLeiModel>> lodaMoreDataCallBack = new CallBack<List<XunLeiModel>>() {

@@ -1,5 +1,7 @@
 package com.czg.xunlei.activity;
 
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,9 +37,10 @@ public class SettingActivity extends BaseActivity {
     @Bind(R.id.tv_clear_cache)
     AppCompatTextView mTvClearCache;
     EditText ed;
+
     @Override
     protected void initData() {
-        ed = (EditText)findViewById(R.id.ed);
+        ed = (EditText) findViewById(R.id.ed);
         ed.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -46,10 +49,10 @@ public class SettingActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                for (int i=0;i<s.length();i++){
+                for (int i = 0; i < s.length(); i++) {
                     int in = s.charAt(i);
-                    Log.e("aaaa","asii_i"+in);
-                    Log.e("aaaa","asii_c"+(char)in);
+                    Log.e("aaaa", "asii_i" + in);
+                    Log.e("aaaa", "asii_c" + (char) in);
 
                 }
 
@@ -61,9 +64,8 @@ public class SettingActivity extends BaseActivity {
 
             }
         });
-     //   startActivity(new Intent(this, SettingsActivity.class));
-    }
 
+    }
 
     @Override
     protected void initView() {
@@ -73,11 +75,14 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferenceUtils.put(SettingActivity.this, Config.THEME, isChecked ? Config.THEME_DARK : Config.THEME_LIGHT);
-                recreate();
-            }
-        });
+                Intent intent = new Intent();
+                intent.setAction(THEME_CHANGE);
+                LocalBroadcastManager.getInstance(SettingActivity.this).sendBroadcast(intent);
 
-    }
+        }
+    });
+
+}
 
     @Override
     protected int getLayoutId() {

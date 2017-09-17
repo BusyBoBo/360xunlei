@@ -62,6 +62,6 @@ public class TypeMenuFragment extends BaseFragment implements OnItemClickListene
     @Override
     public void onItemClick(View view, int position) {
         ThumbActivity activity = (ThumbActivity) getActivity();
-        activity.setApi(mAdapter.getItem(position).getApi());
+        activity.setApi(mAdapter.getItem(position).getApi(),mAdapter.getItem(position).getName());
     }
 }

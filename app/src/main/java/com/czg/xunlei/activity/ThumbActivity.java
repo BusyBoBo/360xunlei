@@ -1,10 +1,10 @@
 package com.czg.xunlei.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -32,22 +32,39 @@ public class ThumbActivity extends BaseActivity {
     private BaseAdapter<ThumbModel> mBaseAdapter;
     private String mApi;
     private ActionBarDrawerToggle mDrawerToggle;
+    private String title;
+
+    public static void startThumbActivity(Context context, String api, String title) {
+        Intent intent = new Intent(context,ThumbActivity.class);
+        intent.putExtra("API",api);
+        intent.putExtra("TITLE",title);
+        context.startActivity(intent);
+
+    }
+
 
     @Override
     protected void initData() {
         mApi = getIntent().getStringExtra("API");
-        loadData();
+        title = getIntent().getStringExtra("TITLE");
+        setTitle(title);
+        if(mApi!=null) {
+            loadData();
+        }
+
 
     }
 
-    public void setApi(String api) {
+    public void setApi(String api,String name) {
         mApi = api;
+        setTitle(name);
         loadData();
     }
 
     private int page = 1;
 
     private void loadData() {
+        showLoadingView();
         page = 1;
         mXrecyclerview.setNoMore(false);//"vl_genre.php?g=da"
         sendHttp(new ThumbRequest(mApi, page), new CallBack<List<ThumbModel>>() {
@@ -59,12 +76,12 @@ public class ThumbActivity extends BaseActivity {
                     mBaseAdapter.setData(response);
                     mXrecyclerview.refreshComplete();
                 }
-
+                showDataView();
             }
 
             @Override
             public void onFail(Throwable throwable) {
-
+                showErrorView();
             }
         });
     }
@@ -119,7 +136,7 @@ public class ThumbActivity extends BaseActivity {
             }
         };
         mDrawerToggle.syncState();
-     
+
         drawer_layout.setDrawerListener(mDrawerToggle);
 
 

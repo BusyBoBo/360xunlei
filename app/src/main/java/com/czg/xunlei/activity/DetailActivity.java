@@ -50,18 +50,20 @@ public class DetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         String ID = getIntent().getStringExtra("ID");
+        showLoadingView();
         sendHttp(new DetailRequest(ID), new CallBack<VideoDetailModel>() {
             @Override
             public void onSuccess(VideoDetailModel response) {
                 if (response != null) {
                     loadData(response);
                 }
-
+                showDataView();
             }
 
             @Override
             public void onFail(Throwable throwable) {
                 Toast.makeText(DetailActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                showErrorView();
             }
         });
 
@@ -103,7 +105,7 @@ public class DetailActivity extends BaseActivity {
             flow_type_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity( new Intent(DetailActivity.this, ThumbActivity.class).putExtra("API",model.getApi()));
+                    ThumbActivity.startThumbActivity(DetailActivity.this,model.getApi(),"演员："+model.getName());
                 }
             });
 
@@ -138,13 +140,14 @@ public class DetailActivity extends BaseActivity {
                 startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getSearchId()));
                 break;
             case R.id.marker:
-                startActivity( new Intent(this, ThumbActivity.class).putExtra("API",mDetailModel.getMaker().getApi()));
+                ThumbActivity.startThumbActivity(this,mDetailModel.getMaker().getApi(),"制作商："+mDetailModel.getMaker().getName());
                 break;
             case R.id.label:
-                startActivity( new Intent(this, ThumbActivity.class).putExtra("API",mDetailModel.getLabel().getApi()));
+                ThumbActivity.startThumbActivity(this,mDetailModel.getLabel().getApi(),"发行商："+mDetailModel.getLabel().getName());
                 break;
             case R.id.director:
-                startActivity( new Intent(this, ThumbActivity.class).putExtra("API",mDetailModel.getDirector().getApi()));
+                ThumbActivity.startThumbActivity(this,mDetailModel.getDirector().getApi(),"作者："+mDetailModel.getDirector().getName());
+
                 break;
 
         }
