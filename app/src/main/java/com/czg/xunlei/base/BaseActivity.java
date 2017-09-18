@@ -66,12 +66,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         tool_bar.setTitleTextColor(Color.WHITE);
         if (isHaveToolBar()) {
             setSupportActionBar(tool_bar);
+            initNavigation();
         } else {
             tool_bar.setVisibility(View.GONE);
         }
 
 
-        initNavigation();
+
         mFlFailView = (FrameLayout) findViewById(R.id.fl_fail_view);
         mFlLoadingView = (FrameLayout) findViewById(R.id.fl_loading_view);
         mAnimLoadingView = (AVLoadingIndicatorView) findViewById(R.id.anim_loading_view);

@@ -1,6 +1,7 @@
 package com.czg.xunlei.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,7 @@ import com.czg.xunlei.base.BaseAdapter;
 import com.czg.xunlei.base.BaseFragment;
 import com.czg.xunlei.base.OnItemClickListener;
 import com.czg.xunlei.http.callback.CallBack;
-import com.czg.xunlei.http.request.ThumbRequest;
+import com.czg.xunlei.http.request.HomeRequest;
 import com.czg.xunlei.model.ThumbModel;
 import com.czg.xunlei.viewholder.ThumbViewHolder;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -33,16 +34,24 @@ public class HomeFragment extends BaseFragment {
     private BaseAdapter<ThumbModel> mBaseAdapter;
     String mApi;
 
+    public static HomeFragment getInstance(String api) {
+        HomeFragment homeFragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("API", api);
+        homeFragment.setArguments(bundle);
+        return homeFragment;
+    }
+
 
     @Override
     protected void initData() {
-
         showLoadingView();
+        loadData();
     }
 
     @Override
     protected void initView() {
-        mApi=getArguments().getString("API");
+        mApi = getArguments().getString("API");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         mRecHome.setLayoutManager(gridLayoutManager);
         mBaseAdapter = new BaseAdapter(getActivity(), ThumbViewHolder.class, R.layout.item_thumb);
@@ -73,11 +82,13 @@ public class HomeFragment extends BaseFragment {
     protected int getLayoutId() {
         return R.layout.fragment_home;
     }
-    int page=-1;
+
+    int page = -1;
+
     private void loadData() {
         page = 1;
         mRecHome.setNoMore(false);//"vl_genre.php?g=da"
-        sendHttp(new ThumbRequest(mApi, page), new CallBack<List<ThumbModel>>() {
+        sendHttp(new HomeRequest(mApi, page), new CallBack<List<ThumbModel>>() {
             @Override
             public void onSuccess(List<ThumbModel> response) {
                 if (response.isEmpty()) {
@@ -91,13 +102,15 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onFail(Throwable throwable) {
+                throwable.printStackTrace();
                 showErrorView();
             }
         });
     }
+
     private void loadMoreData() {
         page++;
-        sendHttp(new ThumbRequest("vl_genre.php?g=da", page), new CallBack<List<ThumbModel>>() {
+        sendHttp(new HomeRequest(mApi, page), new CallBack<List<ThumbModel>>() {
             @Override
             public void onSuccess(List<ThumbModel> response) {
                 if (!response.isEmpty()) {

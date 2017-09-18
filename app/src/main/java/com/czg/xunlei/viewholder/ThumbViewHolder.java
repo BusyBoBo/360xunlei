@@ -33,7 +33,7 @@ public class ThumbViewHolder extends BaseViewHolder<ThumbModel> {
 
     @Override
     public void setData(ThumbModel data) {
-        mTvSearchId.setText(data.getTitle());
+        mTvSearchId.setText(data.getSearchId());
         mTvImage.setRatio(data.getRatio());
         Log.e("img",data.getImage());
         ImageLoader.setImage(mTvImage, data.getImage());

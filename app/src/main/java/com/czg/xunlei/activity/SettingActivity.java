@@ -3,25 +3,14 @@ package com.czg.xunlei.activity;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
 
 import com.czg.xunlei.Config;
 import com.czg.xunlei.R;
 import com.czg.xunlei.base.BaseActivity;
-import com.czg.xunlei.http.callback.CallBack;
-import com.czg.xunlei.http.request.ThumbRequest;
-import com.czg.xunlei.model.ThumbModel;
-import com.czg.xunlei.utils.LogUtils;
 import com.czg.xunlei.utils.SharedPreferenceUtils;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -42,34 +31,9 @@ public class SettingActivity extends BaseActivity {
     AppCompatTextView mTvSwitchHost;
     @Bind(R.id.tv_clear_cache)
     AppCompatTextView mTvClearCache;
-    EditText ed;
 
     @Override
     protected void initData() {
-        ed = (EditText) findViewById(R.id.ed);
-        ed.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                for (int i = 0; i < s.length(); i++) {
-                    int in = s.charAt(i);
-                    Log.e("aaaa", "asii_i" + in);
-                    Log.e("aaaa", "asii_c" + (char) in);
-
-                }
-
-                LogUtils.e(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
     }
 

@@ -89,7 +89,7 @@ public class DetailActivity extends BaseActivity {
             flow_type_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity( new Intent(DetailActivity.this, ThumbActivity.class).putExtra("API",model.getApi()));
+                    ThumbActivity.startThumbActivity(DetailActivity.this,model.getApi(),model.getName());
                 }
             });
 

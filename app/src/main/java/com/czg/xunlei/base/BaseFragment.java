@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment {
     AVLoadingIndicatorView mAnimLoadingView;
     private ViewGroup mRootView;
-    private View mContentView;
     FrameLayout mFlLoadingView;
     private View mDataView;
     FrameLayout mFlFailView;
@@ -30,8 +29,8 @@ public abstract class BaseFragment extends Fragment {
         if (mRootView == null) {
 
             mRootView = (ViewGroup) inflater.inflate(R.layout.content_root_view, container, false);
-            mContentView = inflater.inflate(getLayoutId(), mRootView, false);
-            mRootView.addView(mContentView);
+            mDataView = inflater.inflate(getLayoutId(), mRootView, false);
+            mRootView.addView(mDataView);
             mFlFailView = (FrameLayout) mRootView.findViewById(R.id.fl_fail_view);
             mFlLoadingView = (FrameLayout) mRootView.findViewById(R.id.fl_loading_view);
             mAnimLoadingView = (AVLoadingIndicatorView) mRootView.findViewById(R.id.anim_loading_view);
@@ -43,8 +42,8 @@ public abstract class BaseFragment extends Fragment {
             });
 
             ButterKnife.bind(this, mRootView);
-            showDataView();
             initView();
+            showDataView();
             initData();
         }
         return mRootView;
