@@ -22,7 +22,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
     protected Class<? extends BaseViewHolder<T>> clazz;
     protected int layoutId;
 
-    public BaseAdapter(Context context, Class clazz, int layoutId) {
+    public BaseAdapter(Context context, Class<? extends BaseViewHolder<T>> clazz, int layoutId) {
         this.context = context;
         this.clazz = clazz;
         this.layoutId = layoutId;
@@ -56,7 +56,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
             baseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mOnItemClickListener!=null) {
+                    if (mOnItemClickListener != null) {
                         mOnItemClickListener.onItemClick(v, baseViewHolder.getAdapterPosition());
                     }
 

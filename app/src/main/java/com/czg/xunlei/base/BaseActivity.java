@@ -38,11 +38,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     AVLoadingIndicatorView mAnimLoadingView;
     FrameLayout mFlLoadingView;
-
+    private View mDataView;
     FrameLayout mFlFailView;
 
     private ViewGroup mRootview;
-    private View mDataView;
+
     protected static final String THEME_CHANGE = "theme_change";
     private Toolbar tool_bar;
 

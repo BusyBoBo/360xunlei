@@ -6,6 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.czg.xunlei.R;
@@ -35,9 +36,9 @@ public class ThumbActivity extends BaseActivity {
     private String title;
 
     public static void startThumbActivity(Context context, String api, String title) {
-        Intent intent = new Intent(context,ThumbActivity.class);
-        intent.putExtra("API",api);
-        intent.putExtra("TITLE",title);
+        Intent intent = new Intent(context, ThumbActivity.class);
+        intent.putExtra("API", api);
+        intent.putExtra("TITLE", title);
         context.startActivity(intent);
 
     }
@@ -48,18 +49,27 @@ public class ThumbActivity extends BaseActivity {
         mApi = getIntent().getStringExtra("API");
         title = getIntent().getStringExtra("TITLE");
         setTitle(title);
-        if(mApi!=null) {
+        if (mApi != null) {
             loadData();
         }
-
-
     }
 
-    public void setApi(String api,String name) {
+
+    public void setApi(String api, String name) {
         mApi = api;
         setTitle(name);
-        loadData();
+        drawer_layout.closeDrawers();
+        drawer_layout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                loadData();
+                drawer_layout.removeDrawerListener(this);
+            }
+        });
+
     }
+
 
     private int page = 1;
 
@@ -86,9 +96,14 @@ public class ThumbActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected boolean isHaveBackIcon() {
+        return false;
+    }
+
     private void loadMoreData() {
         page++;
-        sendHttp(new ThumbRequest("vl_genre.php?g=da", page), new CallBack<List<ThumbModel>>() {
+        sendHttp(new ThumbRequest(mApi, page), new CallBack<List<ThumbModel>>() {
             @Override
             public void onSuccess(List<ThumbModel> response) {
                 if (!response.isEmpty()) {
@@ -105,6 +120,16 @@ public class ThumbActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerToggle.onOptionsItemSelected(item);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -128,18 +153,18 @@ public class ThumbActivity extends BaseActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                drawer_layout.openDrawer(drawerView);
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                drawer_layout.closeDrawer(drawerView);
             }
         };
         mDrawerToggle.syncState();
 
-        drawer_layout.setDrawerListener(mDrawerToggle);
-
-
+        drawer_layout.addDrawerListener(mDrawerToggle);
         mXrecyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

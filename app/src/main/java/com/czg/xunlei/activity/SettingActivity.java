@@ -6,6 +6,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -14,8 +15,13 @@ import android.widget.Switch;
 import com.czg.xunlei.Config;
 import com.czg.xunlei.R;
 import com.czg.xunlei.base.BaseActivity;
+import com.czg.xunlei.http.callback.CallBack;
+import com.czg.xunlei.http.request.ThumbRequest;
+import com.czg.xunlei.model.ThumbModel;
 import com.czg.xunlei.utils.LogUtils;
 import com.czg.xunlei.utils.SharedPreferenceUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -101,4 +107,5 @@ public class SettingActivity extends BaseActivity {
                 break;
         }
     }
+
 }

@@ -1,12 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00d1c1"
-    android:orientation="vertical"
-    tools:context="com.czg.xunlei.MainActivity">
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+            <EditText
+                android:id="@+id/ed_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+            />
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SEARCH"
+                android:textColor="?attr/colorAccent"/>
+
+        </LinearLayout>
+        <RadioGroup
+            android:id="@+id/radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_scrollFlags="scroll|enterAlways">
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_defult"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DEFULT"
+                android:textColor="?attr/colorAccent"/>
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TIME"
+                android:textColor="?attr/colorAccent"/>
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SIZE"
+                android:textColor="?attr/colorAccent"/>
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_rele"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="RELE"
+                android:textColor="?attr/colorAccent"/>
+        </RadioGroup>
 
 
-</LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/rec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="50dp"
+        app:backgroundTint="#ff87ffeb"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="#33728dff"
+    />
+</android.support.design.widget.CoordinatorLayout>
