@@ -8,7 +8,7 @@ import com.czg.xunlei.http.client.HttpClient;
  * @author ：czg
  * @class ：App.class
  * @date ：2017/9/15.
- * @describe ：TODO(input describe)
+ * @describe ：
  */
 public class App extends Application {
     @Override

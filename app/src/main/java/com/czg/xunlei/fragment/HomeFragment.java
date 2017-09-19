@@ -3,7 +3,7 @@ package com.czg.xunlei.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.view.LayoutInflater;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.czg.xunlei.R;
@@ -15,7 +15,8 @@ import com.czg.xunlei.http.callback.CallBack;
 import com.czg.xunlei.http.request.HomeRequest;
 import com.czg.xunlei.model.ThumbModel;
 import com.czg.xunlei.viewholder.ThumbViewHolder;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.czg.xunlei.widget.XOnRefreshListener;
+import com.czg.xunlei.widget.XSwipeRefreshLayout;
 
 import java.util.List;
 
@@ -28,9 +29,10 @@ import butterknife.Bind;
  * @describe ：TODO(input describe)
  */
 public class HomeFragment extends BaseFragment {
-
+    @Bind(R.id.refreshlayout)
+    XSwipeRefreshLayout refreshlayout;
     @Bind(R.id.rec_home)
-    XRecyclerView mRecHome;
+    RecyclerView mRecHome;
     private BaseAdapter<ThumbModel> mBaseAdapter;
     String mApi;
 
@@ -65,7 +67,7 @@ public class HomeFragment extends BaseFragment {
                 }
             }
         });
-        mRecHome.setLoadingListener(new XRecyclerView.LoadingListener() {
+        refreshlayout.setXOnRefreshListener(new XOnRefreshListener() {
             @Override
             public void onRefresh() {
                 loadData();
@@ -87,15 +89,15 @@ public class HomeFragment extends BaseFragment {
 
     private void loadData() {
         page = 1;
-        mRecHome.setNoMore(false);//"vl_genre.php?g=da"
+     //   mRecHome.setNoMore(false);//"vl_genre.php?g=da"
         sendHttp(new HomeRequest(mApi, page), new CallBack<List<ThumbModel>>() {
             @Override
             public void onSuccess(List<ThumbModel> response) {
                 if (response.isEmpty()) {
-                    mRecHome.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.empty_thumb, null));
+                    //mRecHome.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.empty_thumb, null));
                 } else {
                     mBaseAdapter.setData(response);
-                    mRecHome.refreshComplete();
+                   // mRecHome.refreshComplete();
                 }
                 showDataView();
             }
@@ -115,9 +117,9 @@ public class HomeFragment extends BaseFragment {
             public void onSuccess(List<ThumbModel> response) {
                 if (!response.isEmpty()) {
                     mBaseAdapter.addData(response);
-                    mRecHome.loadMoreComplete();
+                   // mRecHome.loadMoreComplete();
                 } else {
-                    mRecHome.setNoMore(true);
+                    //mRecHome.setNoMore(true);
                 }
 
             }
