@@ -1,6 +1,5 @@
 package com.czg.xunlei.viewholder;
 
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -35,7 +34,6 @@ public class ThumbViewHolder extends BaseViewHolder<ThumbModel> {
     public void setData(ThumbModel data) {
         mTvSearchId.setText(data.getSearchId());
         mTvImage.setRatio(data.getRatio());
-        Log.e("img",data.getImage());
         ImageLoader.setImage(mTvImage, data.getImage());
         mTvTitle.setText(data.getTitle());
 

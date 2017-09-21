@@ -41,23 +41,21 @@ public class XSwipeRefreshLayout extends SwipeRefreshLayout {
         if (mContentView instanceof RecyclerView) {
             initRecyclerView((RecyclerView) mContentView);
         }
-
-
     }
+
 
     private boolean isLoading;
 
     private void initRecyclerView(RecyclerView contentView) {
         final RecyclerView.LayoutManager layoutManager = contentView.getLayoutManager();
         contentView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 RecyclerView.Adapter adapter = recyclerView.getAdapter();
 
                 if (adapter != null) {
-                    int lastVisibleItemPosition ;
+                    int lastVisibleItemPosition;
                     if (layoutManager instanceof LinearLayoutManager) {
                         lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
                     } else {
@@ -77,6 +75,8 @@ public class XSwipeRefreshLayout extends SwipeRefreshLayout {
                                 @Override
                                 public void run() {
                                     if (mlistener != null) {
+
+
                                         mlistener.onLoadMore();
                                     }
                                     isLoading = false;
@@ -97,5 +97,9 @@ public class XSwipeRefreshLayout extends SwipeRefreshLayout {
     public void setXOnRefreshListener(XOnRefreshListener listener) {
         super.setOnRefreshListener(listener);
         mlistener = listener;
+    }
+
+    public void stopRefreshing() {
+        setRefreshing(false);
     }
 }

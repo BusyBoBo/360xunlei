@@ -191,5 +191,8 @@ public class SearchActivity extends BaseActivity implements XRecyclerView.Loadin
         }
     }
 
-
+    @Override
+    protected boolean isHaveToolBar() {
+        return false;
+    }
 }

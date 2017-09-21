@@ -48,7 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private ViewGroup mRootview;
 
     protected static final String THEME_CHANGE = "theme_change";
-    private Toolbar tool_bar;
+    protected Toolbar tool_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,4 +210,5 @@ public abstract class BaseActivity extends AppCompatActivity {
         setSupportActionBar(tool_bar);
         initNavigation();
     }
+
 }

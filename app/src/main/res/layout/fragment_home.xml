@@ -3,15 +3,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-    <com.czg.xunlei.widget.XSwipeRefreshLayout
-        android:id="@+id/refreshlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/rec_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-    </com.czg.xunlei.widget.XSwipeRefreshLayout>
 
 </LinearLayout>

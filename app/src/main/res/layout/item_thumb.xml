@@ -14,6 +14,7 @@
         android:textSize="15sp"
         tools:text="11111"/>
     <com.czg.xunlei.widget.RatioImageView
+        android:src="@drawable/img_seat"
         android:id="@+id/tv_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

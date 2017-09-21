@@ -134,7 +134,7 @@ public class DetailActivity extends BaseActivity {
         }
         switch (view.getId()) {
             case R.id.image:
-                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getSearchId()));
+                ImageDetailActivity.startImageDetailActivity(this,mDetailModel.getImage());
                 break;
             case R.id.tittle:
                 startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getSearchId()));

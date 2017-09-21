@@ -2,6 +2,7 @@ package com.czg.xunlei.utils;
 
 import android.widget.ImageView;
 
+import com.czg.xunlei.R;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -10,6 +11,6 @@ import com.squareup.picasso.Picasso;
 
 public class ImageLoader {
     public static void setImage(ImageView imageView,String url) {
-        Picasso.with(imageView.getContext()).load(url).into(imageView);
+        Picasso.with(imageView.getContext()).load(url).placeholder(R.drawable.img_seat).into(imageView);
     }
 }
