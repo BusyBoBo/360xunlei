@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+    <uk.co.senab.photoview.PhotoView
+        android:scaleType="fitXY"
+        android:id="@+id/sk_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</FrameLayout>
