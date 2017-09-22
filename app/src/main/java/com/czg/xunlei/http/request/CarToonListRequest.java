@@ -19,7 +19,7 @@ public class CarToonListRequest extends ApiRequest<CarToonModel> {
     private static final String HOST = "http://m.5dmh.net/";
     private final String mUrl;
 
-    //http://m.5dmh.net/pisalianlianqu/list_7_2.html
+    //http://m.5dmh.net/shaonvmanhua/list_7_2.html
     public CarToonListRequest(String api, String page) {
         mUrl = HOST + api + (TextUtils.isEmpty(page) ? "" : "/" + page);
     }

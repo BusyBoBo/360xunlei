@@ -33,6 +33,7 @@ public class CartoonListFragment extends BaseFragment {
     @Override
     protected void initData() {
         loadData();
+        showLoadingView();
     }
 
     @Override
@@ -102,7 +103,7 @@ public class CartoonListFragment extends BaseFragment {
         }
         page++;
 
-        if(page==mPages.size()) {
+        if (page == mPages.size()) {
             rec_cartoon.setNoMore(true);
             return;
         }
