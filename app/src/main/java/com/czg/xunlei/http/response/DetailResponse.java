@@ -1,6 +1,5 @@
 package com.czg.xunlei.http.response;
 
-import android.os.SystemClock;
 import android.text.TextUtils;
 
 import com.czg.xunlei.model.CastModel;
@@ -32,7 +31,6 @@ public class DetailResponse extends Response<VideoDetailModel> {
 
     @Override
     public VideoDetailModel getBody() throws IOException {
-        long threadTimeMillis = SystemClock.currentThreadTimeMillis();
         VideoDetailModel detailModel = new VideoDetailModel();
         String xml = mResponseBody.string();
         Document doc = Jsoup.parse(xml);

@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.czg.xunlei.fragment.HomeFragment;
+import com.czg.xunlei.base.BaseFragment;
 import com.czg.xunlei.model.ApiModel;
 
 import java.util.List;
@@ -15,9 +15,9 @@ import java.util.List;
 
 public class HomeAdapter extends FragmentPagerAdapter {
     List<ApiModel> data;
-    List<HomeFragment> list;
+    List<BaseFragment> list;
 
-    public HomeAdapter(FragmentManager fm, List<ApiModel> data,List<HomeFragment> list) {
+    public HomeAdapter(FragmentManager fm, List<ApiModel> data,List<BaseFragment> list) {
         super(fm);
         this.data = data;
         this.list = list;
@@ -35,6 +35,6 @@ public class HomeAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return data.size();
+        return list.size();
     }
 }
