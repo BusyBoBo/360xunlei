@@ -48,9 +48,9 @@ public class MainActivity extends BaseActivity {
             list.add(new CartoonListFragment());
             for (ApiModel apiModel : Config.API) {
                 HomeFragment homeFragment = HomeFragment.getInstance(apiModel.getApi());
-             //   list.add(homeFragment);
+                list.add(homeFragment);
             }
-        }//漫画
+        }
         HomeAdapter homeAdapter = new HomeAdapter(getSupportFragmentManager(), apiModels, list);
 
         viewPager.setAdapter(homeAdapter);
