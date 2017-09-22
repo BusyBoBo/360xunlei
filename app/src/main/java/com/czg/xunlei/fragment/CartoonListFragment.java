@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.czg.xunlei.R;
+import com.czg.xunlei.activity.CarToonDetailActivity;
 import com.czg.xunlei.base.BaseAdapter;
 import com.czg.xunlei.base.BaseFragment;
 import com.czg.xunlei.base.OnItemClickListener;
@@ -45,10 +46,10 @@ public class CartoonListFragment extends BaseFragment {
         mBaseAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                if (position > 0) {
-//                    ThumbModel thumbModel = mBaseAdapter.getItem(position - 1);
-//                    startActivity(new Intent(getActivity(), DetailActivity.class).putExtra("ID", thumbModel.getApi()));
-//                }
+                if (position > 0) {
+                    CarToonModel.CarToonBean carToonBean = mBaseAdapter.getItem(position - 1);
+                    CarToonDetailActivity.startCarToonDetailActivity(getActivity(), carToonBean.getApi());
+                }
             }
         });
         rec_cartoon.setLoadingListener(new XRecyclerView.LoadingListener() {

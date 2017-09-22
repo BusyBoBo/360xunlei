@@ -32,6 +32,8 @@
             android:label="@string/title_activity_settings"/>
         <activity android:name=".activity.ImageDetailActivity">
         </activity>
+        <activity android:name=".activity.CarToonDetailActivity">
+        </activity>
     </application>
 
 </manifest>
