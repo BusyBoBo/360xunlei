@@ -1,5 +1,6 @@
 package com.czg.xunlei.http.response;
 
+import com.czg.xunlei.model.CarToonBean;
 import com.czg.xunlei.model.CarToonModel;
 
 import org.jsoup.Jsoup;
@@ -29,13 +30,13 @@ public class CarToonListResponse extends Response<CarToonModel> {
     public CarToonModel getBody() throws IOException {
         CarToonModel carToonModel = new CarToonModel();
 
-        List<CarToonModel.CarToonBean> carToonModels = new ArrayList<>();
+        List<CarToonBean> carToonModels = new ArrayList<>();
         List<CarToonModel.CarToonPage> carToonPages = new ArrayList<>();
         String xml = mResponseBody.string();
         Document doc = Jsoup.parse(xml);
         Elements picBoxs = doc.getElementsByClass("picBox");
         for (Element picBox : picBoxs) {
-            CarToonModel.CarToonBean toonModel = new CarToonModel.CarToonBean();
+            CarToonBean toonModel = new CarToonBean();
             toonModel.setApi(picBox.select("a").attr("href"));
             toonModel.setImage(picBox.select("img").attr("src"));
             toonModel.setTitle(picBox.text());

@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.czg.xunlei.R;
 import com.czg.xunlei.base.BaseViewHolder;
-import com.czg.xunlei.model.CarToonModel;
+import com.czg.xunlei.model.CarToonBean;
 import com.czg.xunlei.utils.ImageLoader;
 import com.czg.xunlei.widget.RatioImageView;
 
@@ -17,7 +17,7 @@ import butterknife.Bind;
  * @date ：2017/9/22.
  * @describe ：TODO(input describe)
  */
-public class CartoonListViewHolder extends BaseViewHolder<CarToonModel.CarToonBean> {
+public class CartoonListViewHolder extends BaseViewHolder<CarToonBean> {
 
     @Bind(R.id.tv_image)
     RatioImageView mTvImage;
@@ -31,7 +31,7 @@ public class CartoonListViewHolder extends BaseViewHolder<CarToonModel.CarToonBe
     }
 
     @Override
-    public void setData(CarToonModel.CarToonBean data) {
+    public void setData(CarToonBean data) {
         ImageLoader.setImage(mTvImage,data.getImage());
         mTvTitle.setText(data.getTitle());
     }

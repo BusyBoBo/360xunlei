@@ -50,34 +50,5 @@ public class CarToonModel {
         }
     }
 
-    public static class CarToonBean {
-        private String title;
-        private String image;
-        private String api;
 
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getImage() {
-            return image;
-        }
-
-        public void setImage(String image) {
-            this.image = image;
-        }
-
-        public String getApi() {
-            return api;
-        }
-
-        public void setApi(String api) {
-            this.api = api;
-        }
-
-    }
 }

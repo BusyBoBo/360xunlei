@@ -1,4 +1,4 @@
-package com.czg.xunlei.adapter;
+package com.czg.xunlei.viewholder;
 
 import android.view.ViewGroup;
 import android.widget.TextView;

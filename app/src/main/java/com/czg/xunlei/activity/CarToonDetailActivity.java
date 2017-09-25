@@ -9,12 +9,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.czg.xunlei.R;
-import com.czg.xunlei.adapter.CarToonDetailViewHolder;
+import com.czg.xunlei.viewholder.CarToonDetailViewHolder;
 import com.czg.xunlei.base.BaseActivity;
 import com.czg.xunlei.base.BaseAdapter;
 import com.czg.xunlei.http.callback.CallBack;
 import com.czg.xunlei.http.request.CarToonDetailRequest;
 import com.czg.xunlei.model.CarToonDetail;
+import com.czg.xunlei.utils.SharedPreferenceUtils;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class CarToonDetailActivity extends BaseActivity implements RecyclerViewP
     RecyclerViewPager vp_cartoon_detail;
 
     @Bind(R.id.tv_count)
-     TextView tv_count;
+    TextView tv_count;
     private String mApi;
     private BaseAdapter<String> mDetailViewPager;
 
@@ -70,6 +71,15 @@ public class CarToonDetailActivity extends BaseActivity implements RecyclerViewP
         }
         tv_count.setText(1 + "/" + list.size());
         mDetailViewPager.setData(list);
+        if (mApi != null && !list.isEmpty()) {
+            int count = SharedPreferenceUtils.get(this, mApi, -1);
+            if (count != -1) {
+                vp_cartoon_detail.smoothScrollToPosition(count);
+                tv_count.setText(count + "/" + list.size());
+            }
+
+        }
+
     }
 
     @Override
@@ -94,6 +104,19 @@ public class CarToonDetailActivity extends BaseActivity implements RecyclerViewP
 
     @Override
     public void OnPageChanged(int i, int index) {
+        //vp_cartoon_detail.getCurrentPosition()
+
+
         tv_count.setText((index + 1) + "/" + mDetailViewPager.getItemCount());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mApi != null && vp_cartoon_detail != null && mDetailViewPager.getItemCount() != 0) {
+            SharedPreferenceUtils.put(this, mApi, vp_cartoon_detail.getCurrentPosition());
+        }
+
+
     }
 }

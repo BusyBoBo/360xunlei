@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'android-aspectjx'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
@@ -19,7 +20,25 @@ android {
         }
     }
 }
+aspectjx {
+    excludeJarFilter 'ButterKnife'
+    excludeJarFilter 'butterknife'
+    excludeJarFilter 'com.alibaba'
+    excludeJarFilter 'org.greenrobot'
+    excludeJarFilter 'GifDrawable'
+    excludeJarFilter 'io.reactivex.rxjava2'
+    excludeJarFilter 'com.squareup.retrofit2'
+    excludeJarFilter 'org.ligboy.retrofit2'
+    excludeJarFilter 'me.xiaopan.sketch'
+    excludeJarFilter 'sketch-2.5.0-b1'
 
+
+}//aaa
+greendao {
+    schemaVersion 1
+    daoPackage 'com.czg.xunlei.gen'
+    targetGenDir 'src/main/java'
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -56,5 +75,8 @@ dependencies {
     compile 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.2@aar'
     compile 'com.github.chrisbanes:PhotoView:v1.2.5'
     compile 'com.pnikosis:materialish-progress:1.7'
+    compile 'org.greenrobot:greendao:3.2.0'
+    compile 'com.czg:AopUtils:1.1.2'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
     testCompile 'junit:junit:4.12';
 }

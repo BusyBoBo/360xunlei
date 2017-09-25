@@ -11,6 +11,7 @@ import com.czg.xunlei.base.BaseFragment;
 import com.czg.xunlei.base.OnItemClickListener;
 import com.czg.xunlei.http.callback.CallBack;
 import com.czg.xunlei.http.request.CarToonListRequest;
+import com.czg.xunlei.model.CarToonBean;
 import com.czg.xunlei.model.CarToonModel;
 import com.czg.xunlei.viewholder.CartoonListViewHolder;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -28,7 +29,7 @@ import butterknife.Bind;
 public class CartoonListFragment extends BaseFragment {
     @Bind(R.id.rec_cartoon)
     XRecyclerView rec_cartoon;
-    private BaseAdapter<CarToonModel.CarToonBean> mBaseAdapter;
+    private BaseAdapter<CarToonBean> mBaseAdapter;
     private List<CarToonModel.CarToonPage> mPages;
 
     @Override
@@ -47,7 +48,7 @@ public class CartoonListFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 if (position > 0) {
-                    CarToonModel.CarToonBean carToonBean = mBaseAdapter.getItem(position - 1);
+                    CarToonBean carToonBean = mBaseAdapter.getItem(position - 1);
                     CarToonDetailActivity.startCarToonDetailActivity(getActivity(), carToonBean.getApi());
                 }
             }
