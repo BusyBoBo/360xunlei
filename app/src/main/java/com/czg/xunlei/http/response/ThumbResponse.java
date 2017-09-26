@@ -50,21 +50,21 @@ public class ThumbResponse extends Response<List<ThumbModel>> {
                 onerror = onerror.replaceAll(",", "");
                 onerror = onerror.trim();
                 if (onerror.contains("Error")) {
-                    thumbModel.setImage(video.select("img").attr("src"));
+                    thumbModel.setImage("http:"+video.select("img").attr("src"));
                 } else {
-                    thumbModel.setImage(onerror);
+                    thumbModel.setImage("http:"+onerror);
                 }
 
 
             } else {
-                thumbModel.setImage(video.select("img").attr("src"));
+                thumbModel.setImage("http:"+video.select("img").attr("src"));
             }
             try {
                 ;
                 float radio = Float.parseFloat(video.select("img").attr("width")) / Float.parseFloat(video.select("img").attr("height"));
                 thumbModel.setRatio(radio);
             } catch (Exception ex) {
-                thumbModel.setRatio(1);
+                thumbModel.setRatio(1f);
             }
             if (video.select("div").size() >= 2) {
                 thumbModel.setSearchId(video.select("div").get(1).text());

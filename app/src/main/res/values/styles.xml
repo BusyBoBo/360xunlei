@@ -70,7 +70,10 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?attr/black</item>
     </style>
-    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textSize">20sp</item>
+    <style name="MyTabLayoutTextAppearanceLarge" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">25sp</item>
+    </style>
+    <style name="MyTabLayoutTextAppearanceSmall" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

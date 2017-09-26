@@ -1,14 +1,20 @@
 package com.czg.xunlei.fragment;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.czg.xunlei.R;
 import com.czg.xunlei.activity.CarToonDetailActivity;
 import com.czg.xunlei.base.BaseAdapter;
 import com.czg.xunlei.base.BaseFragment;
 import com.czg.xunlei.base.OnItemClickListener;
+import com.czg.xunlei.base.OnItemLongClickListener;
+import com.czg.xunlei.gen.CarToonBeanDao;
+import com.czg.xunlei.gen.Dao;
 import com.czg.xunlei.http.callback.CallBack;
 import com.czg.xunlei.http.request.CarToonListRequest;
 import com.czg.xunlei.model.CarToonBean;
@@ -53,6 +59,35 @@ public class CartoonListFragment extends BaseFragment {
                 }
             }
         });
+        mBaseAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(View view, final int position) {
+                new AlertDialog.Builder(getActivity())
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (position > 0) {
+
+                                    CarToonBean carToonBean = mBaseAdapter.getItem(position - 1);
+                                    List<CarToonBean> list = Dao.getInstance(getContext().getApplicationContext()).getCarToonBeanDao().queryBuilder().where(CarToonBeanDao.Properties.Api.eq(carToonBean.getApi())).build().list();
+                                    if (list.isEmpty()) {
+                                        Dao.getInstance(getContext().getApplicationContext()).getCarToonBeanDao().save(carToonBean);
+                                        Toast.makeText(getActivity(), "收藏成功", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getActivity(), "已添加到收藏", Toast.LENGTH_SHORT).show();
+                                    }
+
+
+                                }
+                            }
+                        })
+                        .setNegativeButton("否", null)
+                        .setMessage("是否添加到收藏").show();
+                return false;
+            }
+        });
+
+
         rec_cartoon.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

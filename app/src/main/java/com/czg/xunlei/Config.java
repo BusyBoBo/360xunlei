@@ -16,7 +16,6 @@ public class Config {
     public static final List<ApiModel> API = new ArrayList<>();
 
     static {
-        API.add(new ApiModel("漫画", ""));
         API.add(new ApiModel("新话题", "vl_update.php"));
         API.add(new ApiModel("新发行", "vl_newrelease.php"));
         API.add(new ApiModel("新加入", "vl_newentries.php"));

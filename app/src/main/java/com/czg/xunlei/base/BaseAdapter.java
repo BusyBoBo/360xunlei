@@ -42,7 +42,12 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
         return data.get(position);
     }
 
+    private OnItemLongClickListener mOnItemLongClickListener;
     private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
+    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
@@ -62,6 +67,16 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
                 }
             });
+            baseViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (mOnItemLongClickListener != null) {
+                        return mOnItemLongClickListener.onItemLongClick(v, baseViewHolder.getAdapterPosition());
+                    }
+                    return false;
+                }
+            });
+
             return baseViewHolder;
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

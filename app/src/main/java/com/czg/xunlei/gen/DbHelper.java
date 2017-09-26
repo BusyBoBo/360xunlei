@@ -23,13 +23,12 @@ public class DbHelper extends DaoMaster.OpenHelper {
     @Override
     public void onCreate(Database db) {
         super.onCreate(db);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //数据迁移模块
         MigrationHelper.migrate(db,
-                CarToonBeanDao.class);
+                CarToonBeanDao.class,ThumbModelDao.class);
     }
 }

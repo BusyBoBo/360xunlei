@@ -9,12 +9,14 @@ import android.content.Context;
 public class Dao {
     private static Dao instance;
     private final CarToonBeanDao mCarToonBeanDao;
+    private final ThumbModelDao mThumbModelDao;
 
     private Dao(Context context) {
         DbHelper dbHelper = new DbHelper(context, "xunlei.db", null);
         DaoMaster daoMaster = new DaoMaster(dbHelper.getWritableDb());
         DaoSession daoSession = daoMaster.newSession();
         mCarToonBeanDao = daoSession.getCarToonBeanDao();
+        mThumbModelDao = daoSession.getThumbModelDao();
     }
 
     public static synchronized Dao getInstance(Context context) {
@@ -30,5 +32,9 @@ public class Dao {
 
     public CarToonBeanDao getCarToonBeanDao() {
         return mCarToonBeanDao;
+    }
+
+    public ThumbModelDao getThumbModelDao() {
+        return mThumbModelDao;
     }
 }

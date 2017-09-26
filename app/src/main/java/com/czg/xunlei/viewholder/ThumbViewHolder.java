@@ -7,6 +7,7 @@ import com.czg.xunlei.R;
 import com.czg.xunlei.base.BaseViewHolder;
 import com.czg.xunlei.model.ThumbModel;
 import com.czg.xunlei.utils.ImageLoader;
+import com.czg.xunlei.utils.LogUtils;
 import com.czg.xunlei.widget.RatioImageView;
 
 import butterknife.Bind;
@@ -35,6 +36,7 @@ public class ThumbViewHolder extends BaseViewHolder<ThumbModel> {
         mTvSearchId.setText(data.getSearchId());
         mTvImage.setRatio(data.getRatio());
         ImageLoader.setImage(mTvImage, data.getImage());
+        LogUtils.e(data.getImage());
         mTvTitle.setText(data.getTitle());
 
     }
