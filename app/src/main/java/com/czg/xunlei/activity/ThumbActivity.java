@@ -1,18 +1,24 @@
 package com.czg.xunlei.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.czg.xunlei.R;
 import com.czg.xunlei.base.BaseActivity;
 import com.czg.xunlei.base.BaseAdapter;
 import com.czg.xunlei.base.OnItemClickListener;
+import com.czg.xunlei.base.OnItemLongClickListener;
+import com.czg.xunlei.gen.Dao;
+import com.czg.xunlei.gen.ThumbModelDao;
 import com.czg.xunlei.http.callback.CallBack;
 import com.czg.xunlei.http.request.ThumbRequest;
 import com.czg.xunlei.model.ThumbModel;
@@ -145,6 +151,32 @@ public class ThumbActivity extends BaseActivity {
                     ThumbModel thumbModel = mBaseAdapter.getItem(position - 1);
                     startActivity(new Intent(ThumbActivity.this, DetailActivity.class).putExtra("ID", thumbModel.getApi()));
                 }
+            }
+        });
+        mBaseAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(View view,final int position) {
+                new AlertDialog.Builder(ThumbActivity.this)
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (position > 0) {
+
+                                    ThumbModel thumbModel = mBaseAdapter.getItem(position - 1);
+                                    List<ThumbModel> list = Dao.getInstance(getApplicationContext()).getThumbModelDao().queryBuilder().where(ThumbModelDao.Properties.Api.eq(thumbModel.getApi())).build().list();
+                                    if (list.isEmpty()) {
+                                        Dao.getInstance(getApplicationContext()).getThumbModelDao().save(thumbModel);
+                                        Toast.makeText(ThumbActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(ThumbActivity.this, "已添加到收藏", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        })
+                        .setNegativeButton("否", null)
+                        .setMessage("是否添加到收藏").show();
+
+                return false;
             }
         });
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用

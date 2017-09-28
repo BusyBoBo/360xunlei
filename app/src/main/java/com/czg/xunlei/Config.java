@@ -14,6 +14,7 @@ public class Config {
     public static final int THEME_LIGHT = 1;
     public static final int THEME_DARK = 2;
     public static final List<ApiModel> API = new ArrayList<>();
+    public static final List<ApiModel> API_CARTOON = new ArrayList<>();
 
     static {
         API.add(new ApiModel("新话题", "vl_update.php"));
@@ -21,6 +22,9 @@ public class Config {
         API.add(new ApiModel("新加入", "vl_newentries.php"));
         API.add(new ApiModel("最想要", "vl_mostwanted.php"));
         API.add(new ApiModel("高评价", "vl_bestrated.php"));
+        API_CARTOON.add(new ApiModel("少女漫画", "shaonvmanhua"));
+
+
     }
 
     public static String HOST = "http://www.ja14b.com/cn/";

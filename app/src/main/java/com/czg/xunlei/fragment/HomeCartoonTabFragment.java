@@ -3,9 +3,11 @@ package com.czg.xunlei.fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
+import com.czg.xunlei.Config;
 import com.czg.xunlei.R;
 import com.czg.xunlei.adapter.BaseFragmentAdapter;
 import com.czg.xunlei.base.BaseFragment;
+import com.czg.xunlei.model.ApiModel;
 import com.czg.xunlei.model.FragmentTab;
 
 import java.util.ArrayList;
@@ -32,9 +34,10 @@ public class HomeCartoonTabFragment extends BaseFragment {
     @Override
     protected void initView() {
         if (list.isEmpty()) {
-            list.add(new FragmentTab(new CartoonListFragment(), "漫画"));
+            for (ApiModel apiModel : Config.API_CARTOON) {
+                list.add(new FragmentTab(CartoonListFragment.getInstance(apiModel.getApi()), apiModel.getName()));
+            }
             list.add(new FragmentTab(new CollectCartoonFragment(), "收藏"));
-
         }
         BaseFragmentAdapter homeAdapter = new BaseFragmentAdapter(getChildFragmentManager(), list);
         viewPager.setAdapter(homeAdapter);

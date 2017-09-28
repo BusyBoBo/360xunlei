@@ -1,6 +1,7 @@
 package com.czg.xunlei.fragment;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
@@ -37,6 +38,15 @@ public class CartoonListFragment extends BaseFragment {
     XRecyclerView rec_cartoon;
     private BaseAdapter<CarToonBean> mBaseAdapter;
     private List<CarToonModel.CarToonPage> mPages;
+    private String mApi;
+
+    public static CartoonListFragment getInstance(String api) {
+        CartoonListFragment cartoonListFragment = new CartoonListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("API", api);
+        cartoonListFragment.setArguments(bundle);
+        return cartoonListFragment;
+    }
 
     @Override
     protected void initData() {
@@ -46,6 +56,7 @@ public class CartoonListFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        mApi = getArguments().getString("API");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         rec_cartoon.setLayoutManager(gridLayoutManager);
         mBaseAdapter = new BaseAdapter(getActivity(), CartoonListViewHolder.class, R.layout.item_cartoon);
@@ -111,7 +122,7 @@ public class CartoonListFragment extends BaseFragment {
     private void loadData() {
         page = 0;
         rec_cartoon.setNoMore(false);//"vl_genre.php?g=da"
-        sendHttp(new CarToonListRequest("shaonvmanhua", ""), new CallBack<CarToonModel>() {
+        sendHttp(new CarToonListRequest(mApi, ""), new CallBack<CarToonModel>() {
             @Override
             public void onSuccess(CarToonModel response) {
                 if (mPages == null) {
@@ -144,7 +155,7 @@ public class CartoonListFragment extends BaseFragment {
             rec_cartoon.setNoMore(true);
             return;
         }
-        sendHttp(new CarToonListRequest("shaonvmanhua", mPages.get(page).getApi()), new CallBack<CarToonModel>() {
+        sendHttp(new CarToonListRequest(mApi, mPages.get(page).getApi()), new CallBack<CarToonModel>() {
             @Override
             public void onSuccess(CarToonModel response) {
                 if (!response.getCarToonBeen().isEmpty()) {

@@ -29,15 +29,22 @@ public class CarToonDetailResponse extends Response<CarToonDetail> {
         CarToonDetail carToonDetail = null;
         Elements showpages = doc.getElementsByClass("showpage");
         Elements primary = doc.getElementsByClass("primary");
-        LogUtils.xml(primary.html());
         if (showpages.size() > 0) {
             try {
-                String num = showpages.get(0).select("a").get(0).text().replace("共", "").replace("页", "").replace(":", "").trim();
-                int page = Integer.parseInt(num);
+                int page = 0;
+                try {
+                    String num = showpages.get(0).select("a").get(0).text().replace("共", "").replace("页", "").replace(":", "").trim();
+                    Integer.parseInt(num);
+                } catch (Exception e) {
+                    page = 1;
+                }
+
+
                 carToonDetail = new CarToonDetail();
                 carToonDetail.setPage(page);
                 carToonDetail.setName(primary.select("img").attr("alt"));
                 carToonDetail.setUrl(primary.select("img").attr("src").replace("1.jpg", ""));
+                LogUtils.e(carToonDetail.getUrl());
             } catch (Exception e) {
 
             }
