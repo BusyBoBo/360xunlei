@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="com.czg.xunlei.activity.DetailActivity">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context="com.czg.xunlei.activity.DetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,11 +11,11 @@
         android:orientation="vertical">
 
         <com.czg.xunlei.widget.RatioImageView
-            android:scaleType="fitXY"
-            android:src="@drawable/img_seat"
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_seat"/>
 
         <TextView
             android:id="@+id/tittle"
@@ -24,7 +24,7 @@
             android:padding="5dp"
             android:textColor="?attr/black"
             android:textSize="20sp"
-            tools:text="标题" />
+            tools:text="标题"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:textColor="?attr/black"
                 android:textSize="18sp"
-                tools:text="日期" />
+                tools:text="日期"/>
 
             <TextView
                 android:id="@+id/length"
@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:textColor="?attr/black"
                 android:textSize="18sp"
-                tools:text="长度" />
+                tools:text="长度"/>
         </LinearLayout>
 
         <LinearLayout
@@ -62,7 +62,7 @@
                 android:layout_weight="1"
                 android:textColor="?attr/black"
                 android:textSize="18sp"
-                tools:text="制作商" />
+                tools:text="制作商"/>
 
             <TextView
                 android:id="@+id/label"
@@ -71,48 +71,50 @@
                 android:layout_weight="1"
                 android:textColor="?attr/black"
                 android:textSize="18sp"
-                tools:text="发行商" />
+                tools:text="发行商"/>
         </LinearLayout>
         <TextView
-            android:padding="5dp"
             android:id="@+id/director"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:textColor="?attr/black"
             android:textSize="18sp"
-            tools:text="长度" />
+            tools:text="长度"/>
         <TextView
-            android:padding="5dp"
             android:id="@+id/type_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:textColor="?attr/black"
             android:textSize="18sp"
-            tools:text="长度" />
+            tools:text="长度"/>
         <com.czg.xunlei.widget.FlowLayout
-            android:padding="5dp"
             android:id="@+id/type"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:padding="5dp"/>
         <TextView
-            android:padding="5dp"
             android:id="@+id/cast_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:textColor="?attr/black"
             android:textSize="18sp"
-            tools:text="演员" />
+            tools:text="演员"/>
         <com.czg.xunlei.widget.FlowLayout
-            android:padding="5dp"
             android:id="@+id/cast"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"
+            android:padding="5dp"/>
         <!--private DirectorModel director;-->
         <!--private List-->
-
         <!--<TypeModel>  types;-->
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="500dp"/>
     </LinearLayout>
 
 </ScrollView>

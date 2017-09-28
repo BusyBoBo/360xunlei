@@ -1,6 +1,9 @@
 package com.czg.xunlei.activity;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,19 +12,27 @@ import android.widget.Toast;
 
 import com.czg.xunlei.R;
 import com.czg.xunlei.base.BaseActivity;
+import com.czg.xunlei.base.BaseAdapter;
+import com.czg.xunlei.base.OnItemClickListener;
 import com.czg.xunlei.http.callback.CallBack;
+import com.czg.xunlei.http.client.HttpClient;
 import com.czg.xunlei.http.request.DetailRequest;
+import com.czg.xunlei.http.request.SearchRequest;
 import com.czg.xunlei.model.CastModel;
 import com.czg.xunlei.model.TypeModel;
 import com.czg.xunlei.model.VideoDetailModel;
+import com.czg.xunlei.model.XunLeiModel;
 import com.czg.xunlei.utils.ImageLoader;
+import com.czg.xunlei.viewholder.SearchViewHolder;
 import com.czg.xunlei.widget.FlowLayout;
 import com.czg.xunlei.widget.RatioImageView;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class DetailActivity extends BaseActivity {
+public class DetailActivity extends BaseActivity implements OnItemClickListener {
 
     @Bind(R.id.image)
     RatioImageView image;
@@ -45,6 +56,9 @@ public class DetailActivity extends BaseActivity {
     TextView castText;
     @Bind(R.id.cast)
     FlowLayout cast;
+
+    @Bind(R.id.recyclerView)
+     RecyclerView recyclerView;
     private VideoDetailModel mDetailModel;
 
     @Override
@@ -71,6 +85,7 @@ public class DetailActivity extends BaseActivity {
 
     private void loadData(VideoDetailModel response) {
         mDetailModel = response;
+        initSearch(response.getSearchId());
         setTitle(response.getSearchId());
         image.setRatio(response.getRatio());
         ImageLoader.setImage(image, response.getImage());
@@ -89,7 +104,7 @@ public class DetailActivity extends BaseActivity {
             flow_type_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ThumbActivity.startThumbActivity(DetailActivity.this,model.getApi(),model.getName());
+                    ThumbActivity.startThumbActivity(DetailActivity.this, model.getApi(), model.getName());
                 }
             });
 
@@ -105,18 +120,45 @@ public class DetailActivity extends BaseActivity {
             flow_type_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ThumbActivity.startThumbActivity(DetailActivity.this,model.getApi(),"演员："+model.getName());
+                    ThumbActivity.startThumbActivity(DetailActivity.this, model.getApi(), "演员：" + model.getName());
                 }
             });
 
 
         }
 
+
     }
+
+    private void initSearch(String searchId) {
+        HttpClient.getInstances().send(new SearchRequest(searchId, 1, 1), new CallBack<List<XunLeiModel>>() {
+            @Override
+            public void onSuccess(List<XunLeiModel> response) {
+                if (response.isEmpty()) {
+                    Toast.makeText(DetailActivity.this, "暂无资源！", Toast.LENGTH_SHORT).show();
+                } else {
+                    mSearchAdapter.setData(response);
+
+                }
+            }
+
+            @Override
+            public void onFail(Throwable throwable) {
+
+            }
+        });
+
+    }
+
+    private BaseAdapter<XunLeiModel> mSearchAdapter;
 
     @Override
     protected void initView() {
-
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mSearchAdapter = new BaseAdapter(this, SearchViewHolder.class, R.layout.item_search);
+        mSearchAdapter.setOnItemClickListener(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mSearchAdapter);
     }
 
     @Override
@@ -125,31 +167,39 @@ public class DetailActivity extends BaseActivity {
     }
 
 
-
-
     @OnClick({R.id.image, R.id.tittle, R.id.marker, R.id.label, R.id.director})
     public void onViewClicked(View view) {
-        if(mDetailModel==null) {
+        if (mDetailModel == null) {
             return;
         }
         switch (view.getId()) {
             case R.id.image:
-                ImageDetailActivity.startImageDetailActivity(this,mDetailModel.getImage());
+                ImageDetailActivity.startImageDetailActivity(this, mDetailModel.getImage());
                 break;
             case R.id.tittle:
-                startActivity( new Intent(this, SearchActivity.class).putExtra("SEARCH",mDetailModel.getSearchId()));
+                startActivity(new Intent(this, SearchActivity.class).putExtra("SEARCH", mDetailModel.getSearchId()));
                 break;
             case R.id.marker:
-                ThumbActivity.startThumbActivity(this,mDetailModel.getMaker().getApi(),"制作商："+mDetailModel.getMaker().getName());
+                ThumbActivity.startThumbActivity(this, mDetailModel.getMaker().getApi(), "制作商：" + mDetailModel.getMaker().getName());
                 break;
             case R.id.label:
-                ThumbActivity.startThumbActivity(this,mDetailModel.getLabel().getApi(),"发行商："+mDetailModel.getLabel().getName());
+                ThumbActivity.startThumbActivity(this, mDetailModel.getLabel().getApi(), "发行商：" + mDetailModel.getLabel().getName());
                 break;
             case R.id.director:
-                ThumbActivity.startThumbActivity(this,mDetailModel.getDirector().getApi(),"作者："+mDetailModel.getDirector().getName());
+                ThumbActivity.startThumbActivity(this, mDetailModel.getDirector().getApi(), "作者：" + mDetailModel.getDirector().getName());
 
                 break;
 
         }
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        XunLeiModel xunLeiModel = mSearchAdapter.getItem(position);
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(xunLeiModel.getUrl());
+        intent.setData(content_url);
+        startActivity(intent);
     }
 }
