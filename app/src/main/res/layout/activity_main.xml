@@ -41,15 +41,5 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:layout_margin="50dp"
-        app:backgroundTint="#ff87ffeb"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        app:rippleColor="#33728dff"/>
-
 
 </android.support.design.widget.CoordinatorLayout>

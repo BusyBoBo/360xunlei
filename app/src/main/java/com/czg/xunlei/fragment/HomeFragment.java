@@ -73,7 +73,7 @@ public class HomeFragment extends BaseFragment {
         });
         mBaseAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(View view,final int position) {
+            public boolean onItemLongClick(View view, final int position) {
                 new AlertDialog.Builder(getActivity())
                         .setPositiveButton("是", new DialogInterface.OnClickListener() {
                             @Override

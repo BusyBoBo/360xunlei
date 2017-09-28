@@ -64,6 +64,12 @@ public class CarToonDetailActivity extends BaseActivity implements RecyclerViewP
 
     private void parseUrl(CarToonDetail response) {
         ArrayList<String> list = new ArrayList<>();
+
+        if (response.getPage() == 0) {
+            Toast.makeText(CarToonDetailActivity.this, "该漫话无法解析", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
         for (int i = 0; i < response.getPage(); i++) {
             String url = response.getUrl() + (i + 1) + ".jpg";
             list.add(url);

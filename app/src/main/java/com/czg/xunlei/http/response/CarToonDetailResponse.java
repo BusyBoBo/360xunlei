@@ -34,7 +34,7 @@ public class CarToonDetailResponse extends Response<CarToonDetail> {
                 int page = 0;
                 try {
                     String num = showpages.get(0).select("a").get(0).text().replace("共", "").replace("页", "").replace(":", "").trim();
-                    Integer.parseInt(num);
+                    page = Integer.parseInt(num);
                 } catch (Exception e) {
                     page = 1;
                 }
@@ -43,10 +43,16 @@ public class CarToonDetailResponse extends Response<CarToonDetail> {
                 carToonDetail = new CarToonDetail();
                 carToonDetail.setPage(page);
                 carToonDetail.setName(primary.select("img").attr("alt"));
-                carToonDetail.setUrl(primary.select("img").attr("src").replace("1.jpg", ""));
+                String attr = primary.select("img").attr("src");
+                if (attr != null && attr.contains("tu1")) {
+                    carToonDetail.setUrl(attr.replace("1.jpg", ""));
+                } else {
+                    carToonDetail.setPage(0);
+                }
+
                 LogUtils.e(carToonDetail.getUrl());
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
 

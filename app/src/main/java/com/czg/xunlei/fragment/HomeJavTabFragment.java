@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by czg on 2017/9/26.
@@ -49,4 +50,10 @@ public class HomeJavTabFragment extends BaseFragment {
     protected int getLayoutId() {
         return R.layout.fragment_homejavtab;
     }
+
+    @OnClick(R.id.fb_search)
+    public void search(){
+
+    }
+
 }
