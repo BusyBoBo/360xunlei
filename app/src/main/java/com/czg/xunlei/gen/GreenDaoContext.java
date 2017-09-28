@@ -23,7 +23,6 @@ public class GreenDaoContext extends ContextWrapper {
     public GreenDaoContext(Context context) {
         super(context);
         this.mContext = context;
-//        this.currentUserId = "greendao";//初始化
     }
 
     /**
@@ -65,7 +64,6 @@ public class GreenDaoContext extends ContextWrapper {
                 return super.getDatabasePath(name);
         }
     }
-
     /**
      * 重载这个方法，是用来打开SD卡上的数据库的，android 2.3及以下会调用这个方法。
      *
@@ -78,7 +76,6 @@ public class GreenDaoContext extends ContextWrapper {
         SQLiteDatabase result = SQLiteDatabase.openOrCreateDatabase(getDatabasePath(name), factory);
         return result;
     }
-
     /**
      * Android 4.0会调用此方法获取数据库。
      *
@@ -93,9 +90,6 @@ public class GreenDaoContext extends ContextWrapper {
     @Override
     public SQLiteDatabase openOrCreateDatabase(String name, int mode, SQLiteDatabase.CursorFactory factory, DatabaseErrorHandler errorHandler) {
         SQLiteDatabase result = SQLiteDatabase.openOrCreateDatabase(getDatabasePath(name), factory);
-
         return result;
     }
-
-
 }
